@@ -41,9 +41,9 @@ ifdef::uk[]
 endif::[]
 ifndef::uk[]
 :lang: fr
-:lastName: NOM
-:firstName: Prénom
-:group: Groupe
+:lastName: DELMAS
+:firstName: Lauretta
+:group: 4
 :example: Exemple
 :Enseignants: Enseignants
 :principe: Principe Objet
