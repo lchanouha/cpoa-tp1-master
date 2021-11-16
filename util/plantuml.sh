@@ -5,19 +5,24 @@ MAINPATH='.'
 DOCLETPATH=$MAINPATH/doclet
 PUMLPATH=$MAINPATH/util
 
-echo "Creating $UML..."
+set -e
 
-javadoc	-private -quiet	-J-DdestinationFile=$UML -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet -docletpath util/plantUmlDoclet.jar -sourcepath . src/main/java/*.java src/main/java/**/*.java 
+echo "Creating $UML... ===================
 
-echo "Done creating plantUML model"
+javadoc -encoding UTF-8   -private -quiet    -J-DdestinationFile=$UML -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet -docletpath util/plantUmlDoclet.jar -sourcepath . $(find src/main -name *.java)
+
+echo "Done creating plantUML model ==================
+echo ""
 
 cat $UML
 
-echo "Converting $UML to $TYPE..."
-#java -jar $PUMLPATH/plantuml.jar \
+echo ""
+echo "Converting $UML to $TYPE... ====================
+
 java -Djava.awt.headless=true -jar util/plantuml-1.2021.14.jar \
      -config $PUMLPATH/config.cfg \
      -o $(pwd) \
      -t $TYPE $UML
 ret=$?
+
 echo "Done generating PNG from model $ret"
